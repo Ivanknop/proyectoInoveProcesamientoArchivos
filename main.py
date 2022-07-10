@@ -1,9 +1,10 @@
 import handler
 
+
 def procesar_archivo(analisis):
     print('\nProcesando\n')
-    
     handler.procesar(analisis)
+    print ('\n')
     opcion = input('¿Desea realizar otro análisis? Seleccione 1 para sí o cualquier otra tecla para terminar. \n')
     if opcion == '1':
         empezar()
@@ -26,24 +27,24 @@ def solicitar_periodicidad(analisis):
             salir()
 
 def seleccionar_anio(analisis):
-    anio = input('Escoja el año de inicio del análisis. \n (ATENCIÓN: índice proyectado de inflación desde 2007, índice de salarios desde 2016)\n ')
+    anio = input('Escoja el año de inicio del análisis. Hasta 2020 inclusive\n ')
     try: 
         anio = int(anio)
     except:
         print('El año debe ser un número')
         seleccionar_anio(analisis)
-    if (anio > 2022) or (anio <2007):
-        print(f'El año debe estar entre 2007 y 2020. Año seleccionado: {anio}')
+    if (anio > 2021) or (anio <2016):
+        print(f'El año debe estar entre 2016 y 2021. Año seleccionado: {anio}')
         seleccionar_anio(analisis)
     else:
         analisis['inicio']=anio
-    anio_fin = input('Escoja el año de finalización del análisis. \n (ATENCIÓN: índice proyectado de inflación desde 2007, índice de salarios desde 2016)\n ')
+    anio_fin = input('Escoja el año de finalización del análisis. Hasta 2021 inclusive\n ')
     try: 
         anio_fin = int(anio_fin)
     except:
         print('El año debe ser un número')
         seleccionar_anio(analisis)
-    if ((anio_fin > 2021) or (anio_fin <2007)) | (anio_fin < anio):
+    if ((anio_fin > 2021) or (anio_fin <2016)) | (anio_fin < anio):
         print(f'El año debe estar entre 2008 y 2021. Y no puede ser menor al año de inicio.\n')
         seleccionar_anio(analisis)
     else:
@@ -67,7 +68,7 @@ def salir():
 
 def imprimir_inicio():
     print('*'*100)
-    print('Bienvenido al sistema de análisis y procesamientos de archivos\nPor el momento solo tenemos disponibles "La inflación: período..." y "Índices de precios: período..."')
+    print('Bienvenido al sistema de análisis y procesamientos de archivos de inflación y SMVM en Argentina. Período 2016-2021) \n')
     print('*'*100)
     empezar()
 
@@ -78,7 +79,6 @@ def empezar():
     nombre_de_salida_del_archivo(analisis)
     print (analisis)
     procesar_archivo(analisis)
-    
-        
+            
 if __name__ == "__main__":
     imprimir_inicio()

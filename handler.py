@@ -18,9 +18,9 @@ def procesar(a_dic_file):
     periodos = armar_periodo(cantidad_meses, a_dic_file['inicio'],
                              a_dic_file['fin']+1)
 
-    promedios_inflacion = calcular_promedios(file_inflacion, inicio_inflacion,
+    promedios_inflacion = calcular_promedios_inflacion(file_inflacion, inicio_inflacion,
                                              fin_inflacion, cantidad_meses)
-    salarios_promediados = calcular_promedios(file_salarios, inicio_salarios,
+    salarios_promediados = calcular_promedios_salarios(file_salarios, inicio_salarios,
                                               fin_salarios, cantidad_meses)
 
     crear_archivo(periodos, promedios_inflacion, salarios_promediados, a_dic_file['salida'])
@@ -32,7 +32,7 @@ def crear_archivo(periodos, promedios_inflacion, salarios_promediados,
     path_file_output = os.path.join(os.path.dirname(os.getcwd()), "Proyecto Python Inicial")
 
     # sobreescribo el header
-    new_header = ['Período', 'Índice de Inflación', 'Índice de Salarios']
+    new_header = ['Período', 'Índice de Inflación Acumulado', 'Índice de Salarios']
     # Abro/creo y escribo el archivo con los nuevos datos
     try:
         with open(os.path.join(path_file_output, nombre_salida), 'w', newline='',
@@ -66,7 +66,22 @@ def armar_periodo(periodo, ini, fin):
     return new_list
 
 
-def calcular_promedios(lista, ini, fin, periodo):
+def calcular_promedios_inflacion(lista, ini, fin, periodo):
+    lista_promediada = []
+    acumulado = float(lista[ini][1])
+    promedio = 0
+    count = 0
+    for i in range(ini, fin+1):
+        promedio = promedio + float(lista[i][1])
+        count += 1
+        if count == periodo:
+            acumulado += promedio/periodo
+            lista_promediada.append(acumulado)
+            promedio = 0
+            count = 0
+    return lista_promediada
+
+def calcular_promedios_salarios(lista, ini, fin, periodo):
     lista_promediada = []
     promedio = 0
     count = 0
