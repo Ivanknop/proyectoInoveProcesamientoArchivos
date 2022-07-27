@@ -9,6 +9,7 @@ Proyecto para el curso de Python Inicial de Inove. Se procesarán archivos a ele
 - Los archivos utilizados poseen una periodicidad que va desde:
     -Inflación: 2007 - 2021
     -Salarios: 2016 - 2021
+- Por unicidad, se decidió que ambos archivos queden igualados en 2016 como año de inicio.
 
 ### Ejecución del programa
 - Por consola se solicitarán datos para período de tiempo, año de inicio y de finalización del procesamiento, nombre de archivo de salida.
