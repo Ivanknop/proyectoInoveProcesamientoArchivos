@@ -2,6 +2,9 @@ import os
 import csv
 
 def convertir():
+    '''
+    Reprocesa el archivo original solamente una única vez, quitando los registros previos al 2016
+    '''
     # Direccion del archivo a leer
     path_file_input = os.path.join(os.path.dirname(os.getcwd()), "Proyecto Python Inicial")
     
@@ -16,7 +19,7 @@ def convertir():
 
     def booleans_salarios(indice):
         if indice == '':
-            return 0.0
+            return 100.0
         else:
             return indice
 
@@ -32,7 +35,7 @@ def convertir():
 
         # Genero una lista de listas con las columnas necesarias usando listcomprehension
         new_data = [[line[0], booleans_salarios(line[1])]
-                    for line in data_file_input]
+                    for line in data_file_input if int(line[0].split('-')[0])>2015]
 
         # Abro/creo y escribo el archivo con los nuevos datos
         try:
@@ -45,7 +48,5 @@ def convertir():
             pass
     except FileNotFoundError:
         print('ERROR: No se ha encontrado el archivo.')
-    else:
-        print('Se ha creado el archivo correctamente.')  
     
     return new_data

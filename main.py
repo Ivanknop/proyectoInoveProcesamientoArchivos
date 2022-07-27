@@ -26,27 +26,29 @@ def solicitar_periodicidad(analisis):
         else:
             salir()
 
-def seleccionar_anio(analisis):
+def anio_inicio(analisis):
     anio = input('Escoja el año de inicio del análisis. Hasta 2020 inclusive\n ')
     try: 
         anio = int(anio)
     except:
         print('El año debe ser un número')
-        seleccionar_anio(analisis)
+        anio_inicio(analisis)
     if (anio > 2021) or (anio <2016):
         print(f'El año debe estar entre 2016 y 2021. Año seleccionado: {anio}')
-        seleccionar_anio(analisis)
+        anio_inicio(analisis)
     else:
         analisis['inicio']=anio
+    
+def anio_final(analisis):    
     anio_fin = input('Escoja el año de finalización del análisis. Hasta 2021 inclusive\n ')
     try: 
         anio_fin = int(anio_fin)
     except:
         print('El año debe ser un número')
-        seleccionar_anio(analisis)
-    if ((anio_fin > 2021) or (anio_fin <2016)) | (anio_fin < anio):
-        print(f'El año debe estar entre 2008 y 2021. Y no puede ser menor al año de inicio.\n')
-        seleccionar_anio(analisis)
+        anio_final(analisis)
+    if ((anio_fin > 2021) or (anio_fin <2016)) | (anio_fin < analisis['inicio']):
+        print(f'El año debe estar entre 2016 y 2021. Y no puede ser menor al año de inicio.\n')
+        anio_final(analisis)
     else:
         analisis['fin']=anio_fin
 
@@ -73,9 +75,13 @@ def imprimir_inicio():
     empezar()
 
 def empezar():
+    '''
+    Estructura del programa principal
+    '''
     analisis={'periodicidad':'','inicio':-1,'fin':-1,'salida':''}
     solicitar_periodicidad(analisis)
-    seleccionar_anio(analisis)
+    anio_inicio(analisis)
+    anio_final(analisis)
     nombre_de_salida_del_archivo(analisis)
     print (analisis)
     procesar_archivo(analisis)

@@ -1,10 +1,11 @@
 import os
 import csv
-
+from pathlib import Path
 
 def convertir():
-
-
+    '''
+    Reprocesa el archivo original solamente una única vez, quitando los registros previos al 2016
+    '''
     # Direccion del archivo a leer
     path_file_input = os.path.join(os.path.dirname(os.getcwd()), "Proyecto Python Inicial")
     print(path_file_input)
@@ -28,9 +29,9 @@ def convertir():
         new_header = ['Período', 'Incremento Índice Inflación']
 
         # Genero una lista de listas con las columnas necesarias usando listcomprehension
-        new_data = [[line[0], line[2]]
-                    for line in data_file_input]
-
+        ant = [100]
+        new_data = [[ line[0], acumulador(ant, line[2])]
+                    for line in data_file_input if int(line[0].split('-')[0])>2015]
         # Abro/creo y escribo el archivo con los nuevos datos
         try:
             with open(os.path.join(path_file_output, name_output), 'x', newline='',
@@ -42,6 +43,10 @@ def convertir():
             pass
     except FileNotFoundError:
         print('ERROR: No se ha encontrado el archivo.')
-    else:
-        print('Se ha creado el archivo correctamente.')
+
     return new_data
+
+
+def acumulador(anterior, actual):
+    anterior[0]= anterior[0]+float(actual)/12
+    return anterior[0]

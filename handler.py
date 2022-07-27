@@ -5,6 +5,9 @@ import converter_salarios
 
 
 def procesar(a_dic_file):
+    '''
+    Recibe un diccionario para procesar la información solicitada desde el main
+    '''
 
     file_inflacion = converter_inflacion.convertir()
     inicio_inflacion = posicion_en_archivo(file_inflacion, a_dic_file['inicio'])
@@ -28,6 +31,9 @@ def procesar(a_dic_file):
 
 def crear_archivo(periodos, promedios_inflacion, salarios_promediados,
                   nombre_salida):
+    '''
+        Crea el archivo de salida
+    '''
     # Direccion destino del nuevo dataset
     path_file_output = os.path.join(os.path.dirname(os.getcwd()), "Proyecto Python Inicial")
 
@@ -49,6 +55,9 @@ def crear_archivo(periodos, promedios_inflacion, salarios_promediados,
 
 
 def posicion_en_archivo(file, anio):
+    '''
+    Recibe una lista y un año y devuelve la posición donde inicia ese año en el la lista
+    '''
     pos = 0
     while int(file[pos][0].split(sep='-')[0]) < int(anio):
         pos += 1
@@ -56,6 +65,9 @@ def posicion_en_archivo(file, anio):
 
 
 def armar_periodo(periodo, ini, fin):
+    '''
+    Esteblece el rango temporal seleccionado. Recibe año de inicio, de finalización y período de meses
+    '''
     meses = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep',
             'oct', 'nov', 'dic']
     new_list = []
@@ -67,6 +79,9 @@ def armar_periodo(periodo, ini, fin):
 
 
 def calcular_promedios_inflacion(lista, ini, fin, periodo):
+    '''
+    Recibe la lista del archivo, las posiciones inicial y final y el período y retorna la información procesada
+    '''
     lista_promediada = []
     acumulado = float(lista[ini][1])
     promedio = 0
@@ -82,6 +97,9 @@ def calcular_promedios_inflacion(lista, ini, fin, periodo):
     return lista_promediada
 
 def calcular_promedios_salarios(lista, ini, fin, periodo):
+    '''
+    Recibe la lista del archivo, las posiciones inicial y final y el período y retorna la información procesada
+    '''
     lista_promediada = []
     promedio = 0
     count = 0
