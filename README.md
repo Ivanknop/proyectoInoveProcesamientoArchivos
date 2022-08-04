@@ -12,13 +12,16 @@ Proyecto para el curso de Python Inicial de Inove. Se procesarán archivos a ele
 - Por unicidad, se decidió que ambos archivos queden igualados en 2016 como año de inicio.
 
 ### Ejecución del programa
-- Por consola se solicitarán datos para período de tiempo, año de inicio y de finalización del procesamiento, nombre de archivo de salida.
-- Si no se ingresa ningún nombre, hay uno por default.
-- El resultado final es un archivo csv con tres columnas:
+- El programa muestra la evolución de las expectativas de inflación y del salario mínimo vital y móvil en los períodos 2016-2021, y la relación entre ambas. Se puede obtener una síntesis trimestral, semestral o anual del período de años escogido por el usuario.
+- Por consola se solicitarán datos necesarios junto al nombre de salida del archivo; si no se ingresa ningún nombre, hay uno por default.
+- Cada dato solicitado es validado pertinentemente, junto a la opción de terminar el programa oprimiendo "0".
+- Una vez realizado esto, se invoca al "handler" que procede al procesamiento de la información.
+- Si es la primera vez que se ejecuta, se crearán los archivos pre-procesados a partir de los dataset originales. Esto se realiza una única vez.
+- Se procesa la información y el resultado final es un archivo csv con tres columnas:
     - Período (seleccionado por el usuario)
     - Índice de inflación promedio (en ese período)
     - Índice de salario promedio (en ese período)
 
 ### Origen de los datasets:
-- Inflación: https://datos.gob.ar/is/dataset/sspm-expectativas-inflacion
-- Salarios: https://datos.gob.ar/dataset/sspm-indice-salarios-base-octubre-2016/archivo/sspm_149.1
+- Expectativas de Inflación: https://datos.gob.ar/is/dataset/sspm-expectativas-inflacion
+- Índice de salarios. Base octubre 2016. Valores mensuales: https://datos.gob.ar/dataset/sspm-indice-salarios-base-octubre-2016/archivo/sspm_149.1
