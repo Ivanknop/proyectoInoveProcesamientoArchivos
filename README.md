@@ -21,6 +21,7 @@ Proyecto para el curso de Python Inicial de Inove. Se procesarán archivos a ele
     - Período (seleccionado por el usuario)
     - Índice de inflación promedio (en ese período)
     - Índice de salario promedio (en ese período)
+![Diagrama de flujo](https://github.com/Ivanknop/proyectoInoveProcesamientoArchivos/blob/main/ejercicio%20inove.jpg)]
 
 ### Origen de los datasets:
 - Expectativas de Inflación: https://datos.gob.ar/is/dataset/sspm-expectativas-inflacion
