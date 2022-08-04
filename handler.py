@@ -1,5 +1,6 @@
 import csv
 import os
+import pathlib
 import converter_inflacion
 import converter_salarios
 
@@ -35,7 +36,7 @@ def crear_archivo(periodos, promedios_inflacion, salarios_promediados,
         Crea el archivo de salida
     '''
     # Direccion destino del nuevo dataset
-    path_file_output = os.path.join(os.path.dirname(os.getcwd()), "Proyecto Python Inicial")
+    path_file_output = pathlib.Path(__file__).parent.absolute()
 
     # sobreescribo el header
     new_header = ['Período', 'Índice de Inflación Acumulado', 'Índice de Salarios']

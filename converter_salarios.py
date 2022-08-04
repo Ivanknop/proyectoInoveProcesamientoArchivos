@@ -1,18 +1,19 @@
 import os 
 import csv
+import pathlib
 
 def convertir():
     '''
     Reprocesa el archivo original solamente una única vez, quitando los registros previos al 2016
     '''
     # Direccion del archivo a leer
-    path_file_input = os.path.join(os.path.dirname(os.getcwd()), "Proyecto Python Inicial")
+    path_file_input = pathlib.Path(__file__).parent.absolute()
     
     # Nombre del archivo a leer
     name_input = "salario_minimo.csv"
 
     # Direccion destino del nuevo dataset
-    path_file_output = os.path.join(os.path.dirname(os.getcwd()), "Proyecto Python Inicial")
+    path_file_output = pathlib.Path(__file__).parent.absolute()
 
     # Nombre del archivo a escribir/crear
     name_output = "periodo_promedio_salarios.csv"

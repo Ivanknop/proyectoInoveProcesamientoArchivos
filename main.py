@@ -12,48 +12,53 @@ def procesar_archivo(analisis):
         salir()
 
 def solicitar_periodicidad(analisis):
-    periodicidad= (input('Escoja la periodicidad para el análisis: \n 1) Tres Meses\n 2) Seis Meses\n 3) Doce Meses\n '))
+    periodicidad= input('Escoja la periodicidad para el análisis: \n 1) Tres Meses\n 2) Seis Meses\n 3) Doce Meses\n Oprima 0 para salir\n')
     if periodicidad == '1':
         analisis['periodicidad'] = 3
     elif periodicidad == '2':
         analisis['periodicidad'] = 6
     elif periodicidad == '3':
         analisis['periodicidad'] = 12
+    elif periodicidad =='0':
+        salir()
     else:
-        print('Opción no válida. \n Oprima 0 para reintentar o cualquier tecla para terminar\n ')
-        if periodicidad =='0':
-            solicitar_periodicidad(analisis)
-        else:
-            salir()
+        solicitar_periodicidad(analisis)
 
 def anio_inicio(analisis):
-    anio = input('Escoja el año de inicio del análisis. Hasta 2020 inclusive\n ')
+    anio = input('Escoja el año de inicio del análisis. Hasta 2020 inclusive\n Si desea salir oprima 0\n')
     try: 
         anio = int(anio)
     except:
         print('El año debe ser un número')
         anio_inicio(analisis)
-    if (anio > 2021) or (anio <2016):
-        print(f'El año debe estar entre 2016 y 2021. Año seleccionado: {anio}')
-        anio_inicio(analisis)
+    if anio != 0:
+        if (anio > 2021) or (anio <2016):
+            print(f'El año debe estar entre 2016 y 2021. Año seleccionado: {anio}')
+            anio_inicio(analisis)
+        else:
+            analisis['inicio']=anio
     else:
-        analisis['inicio']=anio
-    
+        salir()
+
 def anio_final(analisis):    
-    anio_fin = input('Escoja el año de finalización del análisis. Hasta 2021 inclusive\n ')
+    anio_fin = input('Escoja el año de finalización del análisis. Hasta 2021 inclusive\n Si desea salir oprima 0\n')
     try: 
         anio_fin = int(anio_fin)
     except:
         print('El año debe ser un número')
         anio_final(analisis)
-    if ((anio_fin > 2021) or (anio_fin <2016)) | (anio_fin < analisis['inicio']):
-        print(f'El año debe estar entre 2016 y 2021. Y no puede ser menor al año de inicio.\n')
-        anio_final(analisis)
+    
+    if anio_fin != 0:
+        if ((anio_fin > 2021) or (anio_fin <2016)) | (anio_fin < analisis['inicio']):
+            print(f'El año debe estar entre 2016 y 2021. Y no puede ser menor al año de inicio.\n')
+            anio_final(analisis)
+        else:
+            analisis['fin']=anio_fin
     else:
-        analisis['fin']=anio_fin
+        salir()
 
 def nombre_de_salida_del_archivo(analisis):
-    nombre = input('Introduzca el nombre de salida del nuevo archivo: ')
+    nombre = input('Introduzca el nombre de salida del nuevo archivo. Por defecto "archivo_procesado" ')
     if nombre =='':
         nombre ='archivo_procesado'
     validar_nombre = input(f'El nombre escogido es: {nombre}. \n Seleccione 1 para aceptar o 0 para cambiar: ')  
@@ -67,6 +72,8 @@ def salir():
     print('\n')
     print('Gracias por utilizar nuestros servicios\n')
     print('*'*100)
+    exit()
+    
 
 def imprimir_inicio():
     print('*'*100)
@@ -83,7 +90,6 @@ def empezar():
     anio_inicio(analisis)
     anio_final(analisis)
     nombre_de_salida_del_archivo(analisis)
-    print (analisis)
     procesar_archivo(analisis)
             
 if __name__ == "__main__":
